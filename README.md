@@ -3,9 +3,9 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![CSV](https://img.shields.io/badge/Data-CSV-blue?style=flat)
-![Last Commit](https://img.shields.io/github/last-commit/mikecolbert/3300-scm)
+![Last Commit](https://img.shields.io/github/last-commit/mikecolbert/3300-scm-template)
 
-_Add badges that reflect your project's language, license, and status. Generate them at [shields.io](https://shields.io). Replace the GitHub username and repo name in the last badge URL._
+<mark>_Add badges that reflect your project's language, license, and status. Generate them at [shields.io](https://shields.io). Replace the GitHub username and repo name in the last badge URL._ </mark>
 
 ---
 
@@ -13,7 +13,7 @@ _Add badges that reflect your project's language, license, and status. Generate 
 
 A lightweight browser-based application that fetches a local CSV file and renders its contents as a formatted HTML table — no frameworks, no build tools, no back-end required. Built to demonstrate core JavaScript concepts including the Fetch API, CSV parsing, and dynamic DOM manipulation.
 
-_Write 2–4 sentences describing what your project does, why you built it, and who it's for. Focus on what the project accomplishes, not how it works — save the technical details for the Tech Stack and Features sections._
+<mark>_Write 2–4 sentences describing what your project does, why you built it, and who it's for. Focus on what the project accomplishes, not how it works — save the technical details for the Tech Stack and Features sections._</mark>
 
 ---
 
