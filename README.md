@@ -64,7 +64,7 @@ _List everything a user needs to have installed or configured before they can ru
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/mikecolbert/3300-scm.git
+   git clone https://github.com/mikecolbert/3300-scm-template.git
    ```
 
 2. Navigate into the project folder:
