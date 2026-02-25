@@ -1,0 +1,11 @@
+Order ID,Product,Category,Quantity,Unit Price,Total,Date
+1001,Laptop Pro 15,Electronics,2,1299.99,2599.98,2024-01-05
+1002,Wireless Mouse,Accessories,5,29.99,149.95,2024-01-08
+1003,Standing Desk,Furniture,1,549.00,549.00,2024-01-12
+1004,Monitor 27",Electronics,3,399.99,1199.97,2024-01-15
+1005,USB-C Hub,Accessories,8,49.99,399.92,2024-01-18
+1006,Ergonomic Chair,Furniture,2,699.00,1398.00,2024-01-22
+1007,Mechanical Keyboard,Accessories,4,129.99,519.96,2024-01-25
+1008,Webcam HD,Electronics,6,89.99,539.94,2024-01-28
+1009,Desk Lamp,Furniture,3,74.99,224.97,2024-02-02
+1010,Noise-Canceling Headphones,Electronics,2,249.99,499.98,2024-02-05

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sales Data</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 1.8rem;
+      color: #1a202c;
+    }
+
+    p.subtitle {
+      text-align: center;
+      color: #718096;
+      margin-bottom: 28px;
+      font-size: 0.95rem;
+    }
+
+    .table-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #2d3748;
+      color: white;
+    }
+
+    thead th {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #e2e8f0;
+      transition: background 0.15s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #f7fafc; }
+
+    tbody td {
+      padding: 13px 16px;
+      font-size: 0.92rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .badge-Electronics  { background: #bee3f8; color: #2b6cb0; }
+    .badge-Accessories  { background: #c6f6d5; color: #276749; }
+    .badge-Furniture    { background: #fefcbf; color: #744210; }
+
+    .total { font-weight: 600; color: #2d3748; }
+
+    .footer {
+      max-width: 960px;
+      margin: 16px auto 0;
+      text-align: right;
+      font-size: 0.85rem;
+      color: #718096;
+    }
+
+    #status {
+      text-align: center;
+      padding: 40px;
+      color: #718096;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📊 Sales Report</h1>
+  <p class="subtitle">Loaded from <code>data/sales.csv</code></p>
+
+  <div class="table-wrapper">
+    <div id="status">Loading data…</div>
+  </div>
+
+  <div class="footer" id="footer"></div>
+
+  <script>
+    async function loadCSV(url) {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`Could not fetch ${url}: ${response.status}`);
+      return response.text();
+    }
+
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      const headers = lines[0].split(',').map(h => h.trim());
+      const rows = lines.slice(1).map(line =>
+        line.split(',').map(cell => cell.trim())
+      );
+      return { headers, rows };
+    }
+
+    function buildTable({ headers, rows }) {
+      const table = document.createElement('table');
+
+      // Header
+      const thead = table.createTHead();
+      const headerRow = thead.insertRow();
+      headers.forEach(h => {
+        const th = document.createElement('th');
+        th.textContent = h;
+        headerRow.appendChild(th);
+      });
+
+      // Body
+      const tbody = table.createTBody();
+      rows.forEach(cells => {
+        const tr = tbody.insertRow();
+        cells.forEach((cell, i) => {
+          const td = tr.insertCell();
+
+          // Style the Category column as a badge
+          if (headers[i] === 'Category') {
+            const badge = document.createElement('span');
+            badge.className = `badge badge-${cell.replace(/\s+/g, '')}`;
+            badge.textContent = cell;
+            td.appendChild(badge);
+
+          // Format currency columns
+          } else if (headers[i] === 'Unit Price' || headers[i] === 'Total') {
+            td.textContent = '$' + parseFloat(cell).toFixed(2);
+            if (headers[i] === 'Total') td.className = 'total';
+
+          } else {
+            td.textContent = cell;
+          }
+        });
+      });
+
+      return { table, rowCount: rows.length };
+    }
+
+    (async () => {
+      const wrapper = document.querySelector('.table-wrapper');
+      try {
+        const text = await loadCSV('data/sales.csv');
+        const parsed = parseCSV(text);
+        const { table, rowCount } = buildTable(parsed);
+
+        wrapper.innerHTML = '';
+        wrapper.appendChild(table);
+        document.getElementById('footer').textContent = `${rowCount} records loaded`;
+      } catch (err) {
+        wrapper.innerHTML = `<div id="status">⚠️ Error: ${err.message}<br><br>
+          <small>Make sure you're serving this file from a local server (e.g. <code>npx serve .</code> or VS Code Live Server).</small></div>`;
+      }
+    })();
+  </script>
+
+</body>
+</html>
