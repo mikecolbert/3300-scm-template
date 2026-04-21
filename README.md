@@ -101,7 +101,7 @@ _Describe how to actually use the application after it's running. Include any co
 ## Project Structure
 
 ```
-3300-scm/
+3300-scm-template/
 ├── index.html        # Main application page — loads and displays the CSV
 ├── data/
 │   ├── sales.csv     # Sample sales transaction data
